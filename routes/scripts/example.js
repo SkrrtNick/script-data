@@ -23,7 +23,7 @@ router.get('/image', (req, res) => {
 
         if (data) {
             new Jimp(900, 300, 'white', (err, image) => {
-                if(err) return res.status(500).json({})
+                if (err) return res.status(500).json({})
 
                 Jimp.loadFont(Jimp.FONT_SANS_32_BLACK).then(font => {
 
@@ -114,7 +114,7 @@ router.get('/:id', [
  */
 router.post('/', [
     check('runtime').exists(),
-    check('logsChopped').exists(),
+    check('logsCut').exists(),
     check('username').exists(),
     verifyHmac
 ], (req, res) => {
@@ -126,12 +126,12 @@ router.post('/', [
         })
     }
 
-    const {runtime, logsChopped, username} = req.body
+    const {runtime, logsCut, username} = req.body
 
     ExampleScript.createSession(new ExampleScript({
         username: username,
         runtime: runtime,
-        logsCut: logsChopped
+        logsCut: logsCut
     }), (err, session) => {
         if (err) console.log(err)
 
@@ -153,7 +153,7 @@ router.post('/', [
 router.put('/:id', [
     check('id').exists(),
     check('runtime').exists(),
-    check('logsChopped').exists(),
+    check('logsCut').exists(),
     check('username').exists(),
     verifyHmac
 ], (req, res) => {
@@ -165,7 +165,7 @@ router.put('/:id', [
         })
     }
 
-    const {runtime, logsChopped, username} = req.body
+    const {runtime, logsCut, username} = req.body
     const {id} = req.params
 
     ExampleScript.findOne({sessionId: id}, (err, session) => {
@@ -173,7 +173,7 @@ router.put('/:id', [
 
         if (session) {
             session.runtime = runtime
-            session.logsCut = logsChopped
+            session.logsCut = logsCut
             session.username = username
 
             session.save()
