@@ -13,6 +13,7 @@ services:
     volumes:
       - mongo:/data/db
       - /etc/letsencrypt:/etc/letsencrypt
+      - /etc/ssl:/etc/ssl
 
 volumes:
   mongo:
