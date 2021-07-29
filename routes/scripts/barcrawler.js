@@ -127,7 +127,7 @@ router.post('/', [
         })
     }
 
-    const {runtime, logsCut, username} = req.body
+    const {runtime, beersDrank,crawlsCompleted, username} = req.body
 
     BarCrawler.createSession(new BarCrawler({
         username: username,
