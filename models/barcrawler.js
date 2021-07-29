@@ -4,7 +4,7 @@ const ObjectId = Schema.ObjectId;
 
 const shortid = require('shortid')
 
-const ExampleScriptSchema = new Schema({
+const BarCrawlerSchema = new Schema({
     sessionId: {
         type: String,
         required: true,
@@ -33,7 +33,7 @@ const ExampleScriptSchema = new Schema({
 let BarCrawler = module.exports = mongoose.model('barcrawl', BarCrawlerSchema)
 
 
-module.exports.createSession = (exampleScript, callback) => {
+module.exports.createSession = (barCrawler, callback) => {
     barCrawler.save(callback);
 }
 
