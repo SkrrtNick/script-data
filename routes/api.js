@@ -7,5 +7,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.use('/scripts/example', require('./scripts/example'));
+router.use('/scripts/barcrawler', require('./scripts/barcrawler'));
+
 
 module.exports = router;
