@@ -26,7 +26,7 @@ const ExampleScriptSchema = new Schema({
     timestamps: true
 });
 
-let ExampleScript = module.exports = mongoose.model('Message', ExampleScriptSchema)
+let ExampleScript = module.exports = mongoose.model('Example', ExampleScriptSchema)
 
 
 module.exports.createSession = (exampleScript, callback) => {
