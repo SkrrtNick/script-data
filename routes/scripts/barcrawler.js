@@ -168,7 +168,7 @@ router.put('/:id', [
         })
     }
 
-    const {runtime, logsCut, username} = req.body
+    const {runtime,  beersDrank,crawlsCompleted, username} = req.body
     const {id} = req.params
 
     BarCrawler.findOne({sessionId: id}, (err, session) => {
