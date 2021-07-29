@@ -12,7 +12,7 @@ services:
     image: mongo
     volumes:
       - mongo:/data/db
-      - /etc/letsencrypt:/etc/letsencrypt
+      - /etc/letsencrypt:/etc/letsencrypt:rw
       - /etc/ssl:/etc/ssl
 
 volumes:
