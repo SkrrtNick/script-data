@@ -30,19 +30,19 @@ const ExampleScriptSchema = new Schema({
     timestamps: true
 });
 
-let ExampleScript = module.exports = mongoose.model('Message', ExampleScriptSchema)
+let BarCrawler = module.exports = mongoose.model('barcrawl', BarCrawlerSchema)
 
 
 module.exports.createSession = (exampleScript, callback) => {
-    exampleScript.save(callback);
+    barCrawler.save(callback);
 }
 
 module.exports.getSessions = (callback) => {
-    ExampleScript.find({}, callback)
+    barCrawler.find({}, callback)
 }
 
 module.exports.getUserData = (condition, callback) => {
-    ExampleScript.aggregate([
+    barCrawler.aggregate([
         {$match: condition},
         {
             $group: {
