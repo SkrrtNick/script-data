@@ -42,7 +42,7 @@ module.exports.getSessions = (callback) => {
 }
 
 module.exports.getUserData = (condition, callback) => {
-    barCrawler.aggregate([
+    BarCrawler.aggregate([
         {$match: condition},
         {
             $group: {
