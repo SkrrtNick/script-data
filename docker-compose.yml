@@ -7,14 +7,13 @@ services:
       - "443:443"
     volumes:
       - .:/app
+      - certbot-etc:/etc/letsencrypt
 
   mongodb:
     image: mongo
     volumes:
       - mongo:/data/db
-      - /etc/letsencrypt:/etc/letsencrypt:rw
-      - /etc/ssl:/etc/ssl
 
 volumes:
   mongo:
-
+  certbot-etc:
