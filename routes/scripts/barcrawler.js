@@ -58,7 +58,7 @@ router.get('/', (req, res) => {
     let username = req.query.username
 
     let condition = {
-        ...username && {username}
+        ...username && {usernameLower: username.toLowerCase()}
     }
 
     BarCrawler.getUserData(condition, (err, data) => {
