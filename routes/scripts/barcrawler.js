@@ -177,7 +177,7 @@ router.put('/:id', [
         if (session) {
             session.runtime = runtime
             session.beersDrank = beersDrank
-            session.crawlsCompleted = crawlsCompleted;
+            session.crawlsCompleted = crawlsCompleted
             session.username = username
 
             session.save()
