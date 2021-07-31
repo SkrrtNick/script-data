@@ -51,7 +51,7 @@ module.exports.getUserData = (condition, callback) => {
         {$match: condition},
         {
             $group: {
-                _id: null,
+                _id: "$username",
                 runtime: {
                     $sum: "$runtime"
                 },
