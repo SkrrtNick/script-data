@@ -1,5 +1,6 @@
 
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 let express = require('express');
 let path = require('path');
@@ -18,6 +19,13 @@ mongoose.connect('mongodb://mongodb/script-data', {
     useFindAndModify: false,
     useCreateIndex: true
 });
+
+const corsOptions = {
+    origin: ['https://skrrtscripts.com', 'http://localhost:8080'],
+    credentials: true
+};
+
+app.use(cors(corsOptions));
 
 app.use(logger('dev'));
 app.use(express.json());
