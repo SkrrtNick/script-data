@@ -30,7 +30,7 @@ const BarCrawlerSchema = new Schema({
     timestamps: true
 });
 
-BarCrawlerSchema.pre('save',function(next){
+BarCrawlerSchema.pre('save', function (next) {
     this.usernameLower = this.username.toLowerCase()
     next();
 });
@@ -48,10 +48,10 @@ module.exports.getSessions = (callback) => {
 
 module.exports.getUserData = (condition, callback) => {
     BarCrawler.aggregate([
-        {$match: condition},
+        { $match: condition },
         {
             $group: {
-                _id: "$username",
+                _id: condition.usernameLower ? "$username" : null,
                 runtime: {
                     $sum: "$runtime"
                 },
