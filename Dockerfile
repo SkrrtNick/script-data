@@ -15,7 +15,6 @@ COPY . .
 
 # Expose the port that the application is running on
 EXPOSE 3000
-EXPOSE 443
 
 # Run the application using the npm "start" command (Found in the package.json)
 CMD ["npm", "run", "start"]
