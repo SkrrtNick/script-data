@@ -15,7 +15,7 @@ router.get('/image', (req, res) => {
     let {username} = req.query
 
     let condition = {
-        ...username && {username}
+        ...username && {usernameLower: username.toLowerCase()}
     }
 
     BarCrawler.getUserData(condition, (err, data) => {

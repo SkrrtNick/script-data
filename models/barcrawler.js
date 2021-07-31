@@ -30,6 +30,11 @@ const BarCrawlerSchema = new Schema({
     timestamps: true
 });
 
+BarCrawlerSchema.pre('save',function(next){
+    this.usernameLower = this.username.toLowerCase()
+    next();
+});
+
 let BarCrawler = module.exports = mongoose.model('barcrawl', BarCrawlerSchema)
 
 
