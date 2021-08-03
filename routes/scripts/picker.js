@@ -130,7 +130,7 @@ router.post('/', [
 
     const { runtime, pickedItems, profit, username } = req.body
 
-    Picker.createSession(new Chatter({
+    Picker.createSession(new Picker({
         username: username,
         runtime: runtime,
         pickedItems: pickedItems,
