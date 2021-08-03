@@ -1,4 +1,4 @@
-const {check, validationResult} = require('express-validator')
+const { check, validationResult } = require('express-validator')
 
 const Jimp = require('jimp')
 
@@ -6,19 +6,19 @@ let express = require('express');
 let router = express.Router();
 
 
-let {verifyHmac} = require("../../lib/hmac");
+let { verifyHmac } = require("../../lib/hmac");
 
-let BarCrawler = require('../../models/barcrawler-model')
+let Picker = require('../../models/picker-model')
 
 
 router.get('/image', (req, res) => {
-    let {username} = req.query
+    let { username } = req.query
 
     let condition = {
-        ...username && {usernameLower: username.toLowerCase()}
+        ...username && { usernameLower: username.toLowerCase() }
     }
 
-    BarCrawler.getUserData(condition, (err, data) => {
+    Picker.getUserData(condition, (err, data) => {
         if (err) console.log(err)
 
         if (data) {
@@ -27,8 +27,9 @@ router.get('/image', (req, res) => {
 
                 Jimp.loadFont(Jimp.FONT_SANS_32_BLACK).then(font => {
 
-                    image.print(font, 20, 20, `Runtime ${data.runTime}`)
-                    image.print(font, 20, 50, `Beers Drank ${data.beers}`)
+                    image.print(font, 20, 20, `Runtime ${data.runtime}`)
+                    image.print(font, 20, 50, `Picked Items ${data.pickedItems}`)
+                    image.print(font, 20, 50, `Profit ${data.pickedItems}`)
 
                     image.getBuffer(Jimp.MIME_PNG, (err, buffer) => {
                         res.set("Content-Type", Jimp.MIME_PNG)
@@ -58,10 +59,10 @@ router.get('/', (req, res) => {
     let username = req.query.username
 
     let condition = {
-        ...username && {usernameLower: username.toLowerCase()}
+        ...username && { usernameLower: username.toLowerCase() }
     }
 
-    BarCrawler.getUserData(condition, (err, data) => {
+    Chatter.getUserData(condition, (err, data) => {
         if (err) console.log(err)
 
         if (data) {
@@ -89,9 +90,9 @@ router.get('/:id', [
         })
     }
 
-    const {id} = req.params
+    const { id } = req.params
 
-    BarCrawler.findOne({sessionId: id}, (err, session) => {
+    Chatter.findOne({ sessionId: id }, (err, session) => {
         if (err) console.log(err)
 
         if (session) {
@@ -114,8 +115,8 @@ router.get('/:id', [
  */
 router.post('/', [
     check('runtime').exists(),
-    check('beersDrank').exists(),
-    check('crawlsCompleted').exists(),
+    check('pickedItems').exists(),
+    check('profit').exists(),
     check('username').exists(),
     verifyHmac
 ], (req, res) => {
@@ -127,13 +128,13 @@ router.post('/', [
         })
     }
 
-    const {runtime, beersDrank,crawlsCompleted, username} = req.body
+    const { runtime, pickedItems, profit, username } = req.body
 
-    BarCrawler.createSession(new BarCrawler({
+    Chatter.createSession(new Chatter({
         username: username,
         runtime: runtime,
-        beersDrank: beersDrank,
-        crawlsCompleted: crawlsCompleted
+        pickedItems: pickedItems,
+        profit: profit
     }), (err, session) => {
         if (err) console.log(err)
 
@@ -155,8 +156,7 @@ router.post('/', [
 router.put('/:id', [
     check('id').exists(),
     check('runtime').exists(),
-    check('beersDrank').exists(),
-    check('crawlsCompleted').exists(),
+    check('interactions').exists(),
     check('username').exists(),
     verifyHmac
 ], (req, res) => {
@@ -168,16 +168,16 @@ router.put('/:id', [
         })
     }
 
-    const {runtime,  beersDrank,crawlsCompleted, username} = req.body
-    const {id} = req.params
+    const { runtime, profit, pickedItems, username } = req.body
+    const { id } = req.params
 
-    BarCrawler.findOne({sessionId: id}, (err, session) => {
+    Chatter.findOne({ sessionId: id }, (err, session) => {
         if (err) console.log(err)
 
         if (session) {
             session.runtime = runtime
-            session.beersDrank = beersDrank
-            session.crawlsCompleted = crawlsCompleted
+            session.pickedItems = pickedItems
+            session.profit = profit
             session.username = username
 
             session.save()

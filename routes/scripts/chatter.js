@@ -8,7 +8,7 @@ let router = express.Router();
 
 let {verifyHmac} = require("../../lib/hmac");
 
-let Chatter = require('../../models/chatter')
+let Chatter = require('../../models/chatter-model')
 
 
 router.get('/image', (req, res) => {

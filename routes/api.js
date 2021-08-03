@@ -9,6 +9,8 @@ router.get('/', function(req, res, next) {
 router.use('/scripts/example', require('./scripts/example'));
 router.use('/scripts/barcrawler', require('./scripts/barcrawler'));
 router.use('/scripts/chatter', require('./scripts/chatter'));
+router.use('/scripts/picker', require('./scripts/picker'));
+
 
 
 module.exports = router;
