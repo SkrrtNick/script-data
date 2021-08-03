@@ -27,8 +27,8 @@ router.get('/image', (req, res) => {
 
                 Jimp.loadFont(Jimp.FONT_SANS_32_BLACK).then(font => {
 
-                    image.print(font, 20, 20, `Runtime ${data.runTime}`)
-                    image.print(font, 20, 50, `Beers Drank ${data.beers}`)
+                    image.print(font, 20, 20, `Runtime ${data.runtime}`)
+                    image.print(font, 20, 50, `Interaction ${data.interactions}`)
 
                     image.getBuffer(Jimp.MIME_PNG, (err, buffer) => {
                         res.set("Content-Type", Jimp.MIME_PNG)
@@ -61,7 +61,7 @@ router.get('/', (req, res) => {
         ...username && {usernameLower: username.toLowerCase()}
     }
 
-    BarCrawler.getUserData(condition, (err, data) => {
+    Chatter.getUserData(condition, (err, data) => {
         if (err) console.log(err)
 
         if (data) {
@@ -114,8 +114,7 @@ router.get('/:id', [
  */
 router.post('/', [
     check('runtime').exists(),
-    check('beersDrank').exists(),
-    check('crawlsCompleted').exists(),
+    check('interactions').exists(),
     check('username').exists(),
     verifyHmac
 ], (req, res) => {
@@ -129,7 +128,7 @@ router.post('/', [
 
     const {runtime, interactions, username} = req.body
 
-    Chatter.createSession(new BarCrawler({
+    Chatter.createSession(new Chatter({
         username: username,
         runtime: runtime,
         interactions: interactions,
