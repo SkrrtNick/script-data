@@ -18,7 +18,7 @@ const PickerSchema = new Schema({
         type: Number,
         required: true
     },
-    itemsPicked: {
+    pickedItems: {
         type: Number,
         required: true
     },
@@ -55,8 +55,8 @@ module.exports.getUserData = (condition, callback) => {
                 runtime: {
                     $sum: "$runtime"
                 },
-                itemsPicked: {
-                    $sum: "$itemsPicked"
+                pickedItems: {
+                    $sum: "$pickedItems"
                 },
                 profit: {
                     $sum: "$profit"
