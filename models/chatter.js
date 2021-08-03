@@ -51,9 +51,6 @@ module.exports.getUserData = (condition, callback) => {
                 runtime: {
                     $sum: "$runtime"
                 },
-                beersDrank: {
-                    $sum: "$beersDrank"
-                },
                 interactions: {
                     $sum: "$interactions"
                 }
