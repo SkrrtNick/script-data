@@ -168,7 +168,7 @@ router.put('/:id', [
     const {runtime, interactions, username} = req.body
     const {id} = req.params
 
-    BarCrawler.findOne({sessionId: id}, (err, session) => {
+    Chatter.findOne({sessionId: id}, (err, session) => {
         if (err) console.log(err)
 
         if (session) {
