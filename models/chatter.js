@@ -43,7 +43,7 @@ module.exports.getSessions = (callback) => {
 }
 
 module.exports.getUserData = (condition, callback) => {
-    chatter.aggregate([
+    Chatter.aggregate([
         { $match: condition },
         {
             $group: {
