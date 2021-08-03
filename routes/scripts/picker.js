@@ -156,7 +156,8 @@ router.post('/', [
 router.put('/:id', [
     check('id').exists(),
     check('runtime').exists(),
-    check('interactions').exists(),
+    check('pickedItems').exists(),
+    check('profit').exists(),
     check('username').exists(),
     verifyHmac
 ], (req, res) => {
