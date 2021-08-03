@@ -27,8 +27,9 @@ router.get('/image', (req, res) => {
 
                 Jimp.loadFont(Jimp.FONT_SANS_32_BLACK).then(font => {
 
-                    image.print(font, 20, 20, `Runtime ${data.runTime}`)
-                    image.print(font, 20, 50, `Beers Drank ${data.beers}`)
+                    image.print(font, 20, 20, `Runtime ${data.runtime}`)
+                    image.print(font, 20, 50, `Beers Drank ${data.beersDrank}`)
+                    image.print(font, 20, 70, `Crawls Completed ${data.crawlsCompleted}`)
 
                     image.getBuffer(Jimp.MIME_PNG, (err, buffer) => {
                         res.set("Content-Type", Jimp.MIME_PNG)

@@ -29,7 +29,7 @@ router.get('/image', (req, res) => {
 
                     image.print(font, 20, 20, `Runtime ${data.runtime}`)
                     image.print(font, 20, 50, `Picked Items ${data.pickedItems}`)
-                    image.print(font, 20, 50, `Profit ${data.pickedItems}`)
+                    image.print(font, 20, 50, `Profit ${data.profit}`)
 
                     image.getBuffer(Jimp.MIME_PNG, (err, buffer) => {
                         res.set("Content-Type", Jimp.MIME_PNG)
@@ -62,7 +62,7 @@ router.get('/', (req, res) => {
         ...username && { usernameLower: username.toLowerCase() }
     }
 
-    Chatter.getUserData(condition, (err, data) => {
+    Picker.getUserData(condition, (err, data) => {
         if (err) console.log(err)
 
         if (data) {
@@ -92,7 +92,7 @@ router.get('/:id', [
 
     const { id } = req.params
 
-    Chatter.findOne({ sessionId: id }, (err, session) => {
+    Picker.findOne({ sessionId: id }, (err, session) => {
         if (err) console.log(err)
 
         if (session) {
@@ -130,7 +130,7 @@ router.post('/', [
 
     const { runtime, pickedItems, profit, username } = req.body
 
-    Chatter.createSession(new Chatter({
+    Picker.createSession(new Chatter({
         username: username,
         runtime: runtime,
         pickedItems: pickedItems,
@@ -171,7 +171,7 @@ router.put('/:id', [
     const { runtime, profit, pickedItems, username } = req.body
     const { id } = req.params
 
-    Chatter.findOne({ sessionId: id }, (err, session) => {
+    Picker.findOne({ sessionId: id }, (err, session) => {
         if (err) console.log(err)
 
         if (session) {
